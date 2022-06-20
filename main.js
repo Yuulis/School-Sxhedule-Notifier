@@ -40,6 +40,8 @@ function createMessage(events) {
     return message += "明日の予定はありません。やったね！"
   }
 
+  var flag = false;
+
   events.forEach(function(event, index) {
     if (checkDate(new Date(event.attributes.start_at))) {
       var allDay = event.attributes.all_day;
@@ -53,10 +55,12 @@ function createMessage(events) {
       if (allDay) {
         var date = "⏰" + formatDate(new Date(event.attributes.start_at), 1);
         message += title + "\n" + date + "\n" + description;
+        flag = true;
       } else {
         var startAt = "⏰" + formatDate(new Date(event.attributes.start_at), 2);
         var endAt = formatDate(new Date(event.attributes.end_at), 2);
         message += title + "\n" + startAt + ' - ' + endAt + "\n" + description;
+        flag = true;
       }
    
       if (index < eventsSize - 1) message += "\n\n";
@@ -65,6 +69,7 @@ function createMessage(events) {
     else return true;
   });
 
+  if (!flag) message += "明日の予定はありません。やったね！";
   return message;
 }
 
