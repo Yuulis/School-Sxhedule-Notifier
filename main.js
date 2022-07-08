@@ -37,7 +37,7 @@ function createMessage(events) {
   var eventsSize = events.length;
 
   if (eventsSize === 0) {
-    return message += "明日の予定はありません。やったね！"
+    return message += "明日の予定はありません。"
   }
 
   var flag = false;
