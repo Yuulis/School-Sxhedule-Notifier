@@ -69,7 +69,7 @@ function createMessage(events) {
     else return true;
   });
 
-  if (!flag) message += "明日の予定はありません。やったね！";
+  if (!flag) message += "明日の予定はありません。";
   return message;
 }
 
