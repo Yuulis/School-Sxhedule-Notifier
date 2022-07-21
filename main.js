@@ -1,6 +1,28 @@
 var calendar_name = PropertiesService.getScriptProperties().getProperty("calendar_name");
 var weekday = ["日", "月", "火", "水", "木", "金", "土"];
 
+function convertExcel()  {
+  //変換するExcelファイル
+  var excelFileId = PropertiesService.getDocumentProperties().getProperty("excelFile_id");
+ 
+  //スプレッドシート出力先フォルダー
+  var destFolderId = PropertiesService.getDocumentProperties().getProperty("excelFile_id");
+ 
+  //ExcelファイルをファイルIDで取得
+  var excelFile = DriveApp.getFileById(excelFileId)
+ 
+  //Excelファイル名取得
+  var fileName = excelFile.getName()
+  Logger.log(fileName)
+ 
+  var option =  {
+    mimeType:MimeType.GOOGLE_SHEETS,  //Google sheets
+    parents:[{id:destFolderId}],  //出力先フォルダー
+    title:fileName  //出力先ファイル名
+  }
+  Drive.Files.insert(option,excelFile)
+}
+
 // 通知時間指定のためのトリガーを起動
 function setTrigger(){
 
